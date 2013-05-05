@@ -1,0 +1,7 @@
+tocompile: 
+copy libViconDataStreamSDK_CPP.so in /usr/lib folder.
+
+g++ -lViconDataStreamSDK_CPP quadrotor_trial1.cpp vicon_pos.o -o quadtest
+
+
+to run: ./quadtest
