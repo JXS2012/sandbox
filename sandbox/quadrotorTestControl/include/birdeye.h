@@ -61,10 +61,11 @@ class birdeye
 
   //in flight data updating
   void updateFlightStatus(); //update current position,velocity,etc
-  void updateIntError(pcl::PointXYZ);
-  void resetIntError();
-  void calculate_position_velocity_error(); //used for path controll
+  void updateIntError(pcl::PointXYZ); //update integrated error for hover
+  void resetIntError(); //reset integrated error to zero
+  void calculate_position_velocity_error(); //used for path control
 
+  //getters
   pcl::PointXYZ getShiftedOrigin();
   pcl::PointXYZ getStartPoint();
   pcl::PointXYZ getCurrentPoint();
@@ -74,6 +75,7 @@ class birdeye
   pcl::PointXYZ getAcc_t();
   pcl::PointXYZ getCurrentVel();
   pcl::PointXYZ getIntError();
+
   double getPhi();
   double getPsi();
   double getTheta();
