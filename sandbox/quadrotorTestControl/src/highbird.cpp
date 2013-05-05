@@ -34,8 +34,18 @@ void highbird::initiation()
 
 void highbird::init_parameters()
 {
-  flight_height = 300; //unit mm
-  max_outter_radius = 1200; //unit mm
+  if (!nh_private_.getParam("flight_height", flight_height))
+    flight_height = 300; //unit mm
+
+  if (!nh_private_.getParam("max_outter_radius", max_outter_radius))
+    max_outter_radius = 1200; //unit mm
+
+  if (!nh_private_.getParam("fly", fly))
+    fly = true; //turn motor on or not. 
+
+  printf("Flight height initialized %.3f\n",flight_height);
+  printf("Boundary radius initialized %.3f\n",max_outter_radius);
+  printf("Fly mode initialized %d\n",fly);
 
   shift_no = 0; //number of shifts performed during flight if in hovering mode
   shift_time = 300; //total time for each shift = shift_time/freq
@@ -44,7 +54,6 @@ void highbird::init_parameters()
 
   counter = 0; //used in main loop for tracking time
   
-  fly = true; //turn motor on or not. 
   landing = false; //flag showing whether quadrotor is landing
   outRange = false;
   reachStartPoint = false;

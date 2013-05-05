@@ -52,9 +52,16 @@ void dummybird::init_pid()
 }
 
 void dummybird::init_parameters()
-{
-  g = 9.81;
-  heli_mass = 615;
+{ 
+  if (!nh_private_.getParam("gravity_constant", g))
+    g = 9.81;
+  if (!nh_private_.getParam("heli_mass",heli_mass))
+    heli_mass = 615;
+
+  printf("Gravity constant initialized %.3f\n",g);
+  printf("Helicopter mass initialized %.3f\n",heli_mass);
+  //g = 9.81;
+  //heli_mass = 615;
 }
 
 double dummybird::interpolate_thrust(double input)
@@ -136,7 +143,7 @@ void dummybird::on()
   
   while (!srv_GetMotorsOnOff.response.on)
     {
-      ROS_ERROR("Failed to turn motor on\n");
+      //ROS_ERROR("Failed to turn motor on\n");
       client_SetMotorsOnOff.call(srv_SetMotorsOnOff);
       client_GetMotorsOnOff.call(srv_GetMotorsOnOff);
       usleep(100);
@@ -155,7 +162,7 @@ void dummybird::off()
   
   while (srv_GetMotorsOnOff.response.on)
     {
-      ROS_ERROR("Failed to turn motor off\n");
+      //ROS_ERROR("Failed to turn motor off\n");
       client_SetMotorsOnOff.call(srv_SetMotorsOnOff);
       client_GetMotorsOnOff.call(srv_GetMotorsOnOff);
       usleep(100);

@@ -34,8 +34,16 @@ void birdeye::initiation()
 
 void birdeye::init_parameters()
 {
-  flight_radius = 300;
-  freq = 30;
+  if (!nh_private_.getParam("flight_radius", flight_radius))
+    flight_radius = 300;
+  if (!nh_private_.getParam("freq",freq))
+    freq = 30;
+  
+  printf("Radius initialized %.3f\n",flight_radius);
+  printf("Frequency initialized %.3f\n",freq);
+  
+  //flight_radius = 300;
+  //freq = 30;
 
   lostVicon = false;
   freezeCounter = 0;
@@ -70,7 +78,7 @@ void birdeye::flightOrigin()
 				 ros::Time(0), *transform);
       }
       catch (tf::TransformException ex){
-	ROS_ERROR("%s",ex.what());
+	//ROS_ERROR("%s",ex.what());
 	usleep(100);
 	continue;
       }

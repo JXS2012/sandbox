@@ -9,6 +9,7 @@
 #include "math.h"
 #include <vector>
 
+
 class dummybird
 {
  private:
@@ -31,13 +32,16 @@ class dummybird
   ros::ServiceClient client_SetMotorsOnOff;
   ros::ServiceClient client_GetMotorsOnOff;
 
+  //constants
+  double g,heli_mass;
+
+  //variables
   float thrust_in,pitch_in,roll_in,yaw_in;
   std::vector<float> pitch_log,roll_log,thrust_log;
 
   pcl::PointXYZ kd_hover,kp_hover,ki_hover,kd_path,kp_path;
 
-  float g,heli_mass;
-
+  //functions
   void init_pid();
   void init_parameters();
   //take in desired acc and current psi angle, calculate control output to quadrotor

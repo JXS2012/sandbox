@@ -13,12 +13,16 @@ void timerCallback(const ros::TimerEvent&)
 
 int main(int argc, char** argv)
 {
-  float freq = 30.0;
+  double freq;
 
   ros::init(argc,argv,"quadrotor");
   ros::NodeHandle nh;
   ros::NodeHandle nh_private("~");
-  //hummingbird = new smartbird(nh,nh_private);
+
+  if (!nh_private.getParam("freq",freq))
+    freq = 30.0;
+  printf("call back freq %.3f\n",freq);
+
   hummingbird = new highbird(nh,nh_private);
   printf("create hummingbird\n");
 
@@ -30,5 +34,6 @@ int main(int argc, char** argv)
 
   hummingbird->write_log();
 
+  delete hummingbird;
   return 0;
 }

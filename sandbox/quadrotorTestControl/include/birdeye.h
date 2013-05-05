@@ -23,7 +23,7 @@ class birdeye
   tf::StampedTransform *transform;
 
   //constants;
-  float flight_radius,freq;
+  double flight_radius,freq;
   pcl::PointXYZ shiftedOrigin,zeroVector;
   pcl::PointCloud<pcl::PointXYZ>::Ptr cloud,cloud_vel,cloud_acc;
   pcl::KdTreeFLANN<pcl::PointXYZ> kdtree;

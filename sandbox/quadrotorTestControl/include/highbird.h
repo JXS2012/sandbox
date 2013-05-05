@@ -21,8 +21,8 @@ class highbird
   ros::NodeHandle nh_private_;
 
   //constants
-  float flight_height; //unit mm
-  float max_outter_radius;
+  double flight_height; //unit mm
+  double max_outter_radius;
   float shift_no; //number of shifts performed during flight if in hovering mode
   float shift_time; //total time for each shift = shift_time/freq
   float shift_distance;
