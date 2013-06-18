@@ -62,9 +62,9 @@ CMakeFiles/angleTransform.dir/src/angleTransform.o: /opt/ros/electric/stacks/ros
 CMakeFiles/angleTransform.dir/src/angleTransform.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/manifest.xml
 CMakeFiles/angleTransform.dir/src/angleTransform.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
 CMakeFiles/angleTransform.dir/src/angleTransform.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
+CMakeFiles/angleTransform.dir/src/angleTransform.o: /opt/ros/electric/stacks/ros_comm/clients/rospy/manifest.xml
 CMakeFiles/angleTransform.dir/src/angleTransform.o: /home/jianxin/my_ros_workspace/sandbox/mav_tools-master/mav_msgs/manifest.xml
 CMakeFiles/angleTransform.dir/src/angleTransform.o: /home/jianxin/my_ros_workspace/sandbox/mav_tools-master/mav_srvs/manifest.xml
-CMakeFiles/angleTransform.dir/src/angleTransform.o: /opt/ros/electric/stacks/ros_comm/clients/rospy/manifest.xml
 CMakeFiles/angleTransform.dir/src/angleTransform.o: /opt/ros/electric/ros/tools/rosclean/manifest.xml
 CMakeFiles/angleTransform.dir/src/angleTransform.o: /opt/ros/electric/stacks/ros_comm/tools/rosgraph/manifest.xml
 CMakeFiles/angleTransform.dir/src/angleTransform.o: /opt/ros/electric/stacks/ros_comm/tools/rosparam/manifest.xml

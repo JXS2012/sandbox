@@ -9,6 +9,8 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/quadrotorTestControl</url>
   <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="roslib"/>
   <depend package="mav_msgs"/>
   <depend package="mav_srvs"/>
   <depend package="std_msgs"/>

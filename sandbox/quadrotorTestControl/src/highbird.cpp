@@ -6,33 +6,67 @@ highbird::highbird(ros::NodeHandle nh, ros::NodeHandle nh_private):
 {
 
   ros::NodeHandle node  (nh_,"highbird");
+
   dummy = new dummybird(nh_,nh_private_);
   eye = new birdeye(nh_,nh_private_);
-  
-  //initiate variables
+
   initiation();
+  //initiate variables
 
 }
 
 highbird::~highbird()
 {
+
+  delete dummy;
+  delete eye;
   ROS_INFO("Destroying highbird "); 
 
 }
 
 void highbird::initiation()
 {
-  init_parameters();
+  initParameters();
 
   //defining first flight target point
   targetPoint = eye->getStartPoint();
-  //defining pre points for later velocity calculation
 
+  //readTargets();
+  
+  //targetPoint = eye->getOriginPoint();
+  //targetPoint.z += flight_height;
+  //targetPoint.x += flight_height;
+  //targetPoint.y += flight_height;
+
+  ROS_INFO("hover to %.3f %.3f %.3f",targetPoint.x,targetPoint.y,targetPoint.z);
+  sleep(5);
   if (fly)
     dummy->on();
 }
 
-void highbird::init_parameters()
+void highbird::readTargets()
+{
+  pcl::PointXYZ temp;
+  std::istringstream iss(strTargets);
+
+  while (iss)
+    {
+      std::string sub1,sub2,sub3;
+      iss >>sub1 >>sub2 >>sub3;
+      temp.x = atof(sub1.c_str());
+      temp.y = atof(sub2.c_str());
+      temp.z = atof(sub3.c_str());
+      targets.push_back(temp);
+    }
+
+  targets.pop_back();
+  for (int i = 0; (unsigned)i < targets.size(); i++)
+    ROS_INFO("Target point %d is (%.3f,%.3f,%.3f)",i+1,targets[i].x,targets[i].y,targets[i].z);
+
+  targetPoint = targets[0];
+}
+
+void highbird::initParameters()
 {
   if (!nh_private_.getParam("flight_height", flight_height))
     flight_height = 300; //unit mm
@@ -41,17 +75,24 @@ void highbird::init_parameters()
     max_outter_radius = 1200; //unit mm
 
   if (!nh_private_.getParam("fly", fly))
-    fly = true; //turn motor on or not. 
+    fly = false; //turn motor on or not. 
 
-  printf("Flight height initialized %.3f\n",flight_height);
-  printf("Boundary radius initialized %.3f\n",max_outter_radius);
-  printf("Fly mode initialized %d\n",fly);
+  if (!nh_private_.getParam("targets",strTargets) )
+    strTargets = "0,600,300";
 
-  shift_no = 0; //number of shifts performed during flight if in hovering mode
-  shift_time = 300; //total time for each shift = shift_time/freq
-  shift_distance = 300;
-  current_shift = 0; //counting current shift steps,
+  if (!nh_private_.getParam("freq",freq))
+    freq = 30;
 
+  if (!nh_private_.getParam("total_time",total_time))
+    total_time = 30;
+
+  ROS_INFO("Flight height initialized %.3f",flight_height);
+  ROS_INFO("Boundary radius initialized %.3f",max_outter_radius);
+  ROS_INFO("Fly mode initialized %d",fly);
+  ROS_INFO("Fly duration %.3f",total_time);
+  ROS_DEBUG("%s",strTargets.c_str());
+
+  targetIndex = 0;
   counter = 0; //used in main loop for tracking time
   
   landing = false; //flag showing whether quadrotor is landing
@@ -87,25 +128,13 @@ void highbird::invokeController()
     }
 }
 
-void highbird::shiftTargetPoint()
-{
-  //set new target point to achieve shifting, only available at hovering
-  if (counter > shift_time*current_shift && current_shift<shift_no && hover)
-    {
-      printf ("%.3f shift\n",current_shift);
-      current_shift++;
-      targetPoint.x += shift_distance;
-      targetPoint.y += shift_distance;
-    }
-}
-
 void highbird::checkStartPoint()
 {
   if (norm(vectorMinus(eye->getCurrentPoint(),eye->getStartPoint()))<100 && !reachStartPoint)
     {
       reachStartPoint = true;
       hover = false;
-      printf("Reached start point!\n");
+      ROS_INFO("Reached start point!");
     }
 }
 
@@ -115,33 +144,40 @@ void highbird::safeOutRange()
   temp.z = eye->getCurrentPoint().z;
   if (norm(vectorMinus(eye->getCurrentPoint(),temp))>max_outter_radius && !outRange)
     {
-      printf("origin %.3f %.3f %.3f\n",temp.x,temp.y,temp.z);
-      printf("out of range at point %.3f %.3f %.3f!\n",eye->getCurrentPoint().x,eye->getCurrentPoint().y,eye->getCurrentPoint().z);
+      ROS_INFO("origin %.3f %.3f %.3f",temp.x,temp.y,temp.z);
+      ROS_INFO("out of range at point %.3f %.3f %.3f!",eye->getCurrentPoint().x,eye->getCurrentPoint().y,eye->getCurrentPoint().z);
       outRange = true;
+      
       switchHover();
       targetPoint = eye->getOriginPoint();
       targetPoint.z += flight_height;
-      printf("reset target point %.3f %.3f %.3f!\n",targetPoint.x,targetPoint.y,targetPoint.z);
+      ROS_INFO("reset target point %.3f %.3f %.3f!",targetPoint.x,targetPoint.y,targetPoint.z);
       if (counter<700)
 	counter = 700;
+      /*
+      if (fly)
+	dummy->off();
+      highbird_finish = true;
+      */
     }
 }
 
 void highbird::land()
 {
   //if counter over 800, start landing
-  if (counter > 800 && !landing)
+  if (counter > total_time*freq && !landing)
     {
       switchHover();
       targetPoint = eye->getCurrentPoint();
       targetPoint.z = eye->getOriginPoint().z;
       landing = true;
-      printf("start landing off\n");
+      ROS_INFO("start landing off");
     }
   //if in landing process and height less than 10cm, turn off motor and land
   if (eye->getCurrentPoint().z-eye->getOriginPoint().z < 100 && landing)
     {
-      dummy->off();
+      if (fly)
+	dummy->off();
       highbird_finish = true;
     }    
 }
@@ -152,6 +188,19 @@ void highbird::switchHover()
   eye->resetIntError();
 }
 
+void highbird::hoverFlight()
+{
+  if ( norm(vectorMinus(eye->getCurrentPoint(),targetPoint))<50 
+       && (unsigned)targetIndex < targets.size()-1 )
+    switchNextTarget();
+}
+
+void highbird::switchNextTarget()
+{
+  targetPoint = targets[++targetIndex];
+  switchHover();
+}
+
 void highbird::drive()
 {
   //update flight status
@@ -159,6 +208,9 @@ void highbird::drive()
   
   //check whether arrived at start point
   checkStartPoint();
+
+  //hover to points
+  //hoverFlight();
 
   //check landing condition
   land();
@@ -169,8 +221,6 @@ void highbird::drive()
   //call hover controller or path controller according to (bool hover)
   invokeController();
     
-  //if needed, shift target point
-  //shiftTargetPoint();
   counter ++;
 }
 
@@ -183,7 +233,7 @@ void highbird::write_log()
 {
   std::FILE * pFile;
 
-  pFile = fopen("log.txt","w");
+  pFile = fopen("/home/jianxin/log.txt","w");
   if (pFile!=NULL)
     {
       for (int i = 0; i<eye->getLogSize();i++)

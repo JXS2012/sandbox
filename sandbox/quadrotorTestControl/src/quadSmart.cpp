@@ -1,14 +1,11 @@
 #include <ros/ros.h>
-//#include "smartbird.h"
 #include "highbird.h"
 
-//#include <boost/ref.hpp>
-//smartbird *hummingbird;
-highbird *hummingbird;
+highbird *bird;
 
 void timerCallback(const ros::TimerEvent&)
 {
-  hummingbird->drive();  
+  bird->drive();  
 }
 
 int main(int argc, char** argv)
@@ -21,19 +18,19 @@ int main(int argc, char** argv)
 
   if (!nh_private.getParam("freq",freq))
     freq = 30.0;
-  printf("call back freq %.3f\n",freq);
+  ROS_INFO("call back freq %.3f",freq);
 
-  hummingbird = new highbird(nh,nh_private);
-  printf("create hummingbird\n");
+  bird = new highbird(nh,nh_private);
+  ROS_INFO("create bird");
 
   ros::Timer timer = nh.createTimer(ros::Duration(1.0/freq),timerCallback);
-  printf("create timer\n");
+  ROS_INFO("create timer");
   
-  while (nh.ok() && !hummingbird->finish())
+  while (nh.ok() && !bird->finish())
     ros::spinOnce();
 
-  hummingbird->write_log();
+  bird->write_log();
 
-  delete hummingbird;
+  delete bird;
   return 0;
 }

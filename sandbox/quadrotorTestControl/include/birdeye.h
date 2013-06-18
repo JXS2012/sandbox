@@ -24,18 +24,21 @@ class birdeye
 
   //constants;
   double flight_radius,freq;
+  std::string vicon;
   pcl::PointXYZ shiftedOrigin,zeroVector;
   pcl::PointCloud<pcl::PointXYZ>::Ptr cloud,cloud_vel,cloud_acc;
   pcl::KdTreeFLANN<pcl::PointXYZ> kdtree;
+  int averageStep;
 
   //variables;
-  double roll,pitch,yaw;
   pcl::PointXYZ currentPoint,prePoint,originPoint;
-  pcl::PointXYZ e_p,e_v,acc_t,currentVel,intError;
+  pcl::PointXYZ e_p,e_v,acc_t,currentVel,currentAcc,intError;
   double phi,psi,theta;
-  std::vector<float> x_log, y_log, z_log, phi_log, theta_log, psi_log;
+  //std::vector<float> x_log, y_log, z_log, phi_log, theta_log, psi_log;
+  std::vector<pcl::PointXYZ> pointLog,angleLog,velLog,accLog;
+
   //handle vicon lost
-  int freezeCounter;
+  int freezeCounter,currentIndex;
   bool lostVicon;
 
   //functions
@@ -47,13 +50,15 @@ class birdeye
   void init_pointcloud(); //initiate path
 
   //in flight data updating
-  void transformZYXtoZXY();
+  void transformZYXtoZXY(double,double,double);
 
   //flight log record
   void flightLog();
 
   //vicon lost handle
   void viconLostHandle();
+  pcl::PointXYZ differentiate(const std::vector<pcl::PointXYZ>&);
+  bool checkZeroVector(pcl::PointXYZ);
 
  public:
   birdeye(ros::NodeHandle nh, ros::NodeHandle nh_private);
@@ -86,6 +91,12 @@ class birdeye
   float getLog_phi(int);
   float getLog_theta(int);
   float getLog_psi(int);
+  float getLog_velX(int);
+  float getLog_velY(int);
+  float getLog_velZ(int);
+  float getLog_accX(int);
+  float getLog_accY(int);
+  float getLog_accZ(int);
 
   int getLogSize();
 };

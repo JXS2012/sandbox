@@ -49,12 +49,14 @@ target_link_libraries(highbird birdeye)
 rosbuild_add_executable(quadSmart src/quadSmart.cpp)
 target_link_libraries(quadSmart highbird)
 
+rosbuild_add_executable(quadView src/quadView.cpp)
+target_link_libraries(quadView birdeye)
+
 #rosbuild_add_executable(quadFlight src/quadFlight.cpp)
 #target_link_libraries(quadFlight quadrotor)
 
-#rosbuild_add_executable(testControl src/testControl.cpp)
+rosbuild_add_executable(testControl src/testControl.cpp)
 #rosbuild_add_executable(tfListen src/tfListen.cpp)
-#rosbuild_add_executable(angleTransform src/angleTransform.cpp)
+rosbuild_add_executable(angleTransform src/angleTransform.cpp)
 #rosbuild_add_executable(quadShift src/quadShift.cpp)
 #rosbuild_add_executable(quadController src/quadController.cpp)
-

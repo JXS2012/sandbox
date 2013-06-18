@@ -63,11 +63,15 @@ vector_computation.h
 ../include/vector_computation.h
 math.h
 ../include/math.h
-sstream
--
 vector
 -
 stdio.h
+-
+iostream
+-
+sstream
+-
+string
 -
 
 ../include/vector_computation.h

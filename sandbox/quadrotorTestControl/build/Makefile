@@ -148,6 +148,19 @@ ROSBUILD_gensrv_lisp/fast:
 .PHONY : ROSBUILD_gensrv_lisp/fast
 
 #=============================================================================
+# Target rules for targets named angleTransform
+
+# Build rule for target.
+angleTransform: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 angleTransform
+.PHONY : angleTransform
+
+# fast build rule for target.
+angleTransform/fast:
+	$(MAKE) -f CMakeFiles/angleTransform.dir/build.make CMakeFiles/angleTransform.dir/build
+.PHONY : angleTransform/fast
+
+#=============================================================================
 # Target rules for targets named birdeye
 
 # Build rule for target.
@@ -211,6 +224,19 @@ quadSmart: cmake_check_build_system
 quadSmart/fast:
 	$(MAKE) -f CMakeFiles/quadSmart.dir/build.make CMakeFiles/quadSmart.dir/build
 .PHONY : quadSmart/fast
+
+#=============================================================================
+# Target rules for targets named quadView
+
+# Build rule for target.
+quadView: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 quadView
+.PHONY : quadView
+
+# fast build rule for target.
+quadView/fast:
+	$(MAKE) -f CMakeFiles/quadView.dir/build.make CMakeFiles/quadView.dir/build
+.PHONY : quadView/fast
 
 #=============================================================================
 # Target rules for targets named rosbuild_precompile
@@ -330,6 +356,19 @@ test-results-run/fast:
 .PHONY : test-results-run/fast
 
 #=============================================================================
+# Target rules for targets named testControl
+
+# Build rule for target.
+testControl: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 testControl
+.PHONY : testControl
+
+# fast build rule for target.
+testControl/fast:
+	$(MAKE) -f CMakeFiles/testControl.dir/build.make CMakeFiles/testControl.dir/build
+.PHONY : testControl/fast
+
+#=============================================================================
 # Target rules for targets named tests
 
 # Build rule for target.
@@ -354,6 +393,21 @@ vector_computation: cmake_check_build_system
 vector_computation/fast:
 	$(MAKE) -f CMakeFiles/vector_computation.dir/build.make CMakeFiles/vector_computation.dir/build
 .PHONY : vector_computation/fast
+
+# target to build an object file
+src/angleTransform.o:
+	$(MAKE) -f CMakeFiles/angleTransform.dir/build.make CMakeFiles/angleTransform.dir/src/angleTransform.o
+.PHONY : src/angleTransform.o
+
+# target to preprocess a source file
+src/angleTransform.i:
+	$(MAKE) -f CMakeFiles/angleTransform.dir/build.make CMakeFiles/angleTransform.dir/src/angleTransform.i
+.PHONY : src/angleTransform.i
+
+# target to generate assembly for a file
+src/angleTransform.s:
+	$(MAKE) -f CMakeFiles/angleTransform.dir/build.make CMakeFiles/angleTransform.dir/src/angleTransform.s
+.PHONY : src/angleTransform.s
 
 # target to build an object file
 src/birdeye.o:
@@ -416,6 +470,36 @@ src/quadSmart.s:
 .PHONY : src/quadSmart.s
 
 # target to build an object file
+src/quadView.o:
+	$(MAKE) -f CMakeFiles/quadView.dir/build.make CMakeFiles/quadView.dir/src/quadView.o
+.PHONY : src/quadView.o
+
+# target to preprocess a source file
+src/quadView.i:
+	$(MAKE) -f CMakeFiles/quadView.dir/build.make CMakeFiles/quadView.dir/src/quadView.i
+.PHONY : src/quadView.i
+
+# target to generate assembly for a file
+src/quadView.s:
+	$(MAKE) -f CMakeFiles/quadView.dir/build.make CMakeFiles/quadView.dir/src/quadView.s
+.PHONY : src/quadView.s
+
+# target to build an object file
+src/testControl.o:
+	$(MAKE) -f CMakeFiles/testControl.dir/build.make CMakeFiles/testControl.dir/src/testControl.o
+.PHONY : src/testControl.o
+
+# target to preprocess a source file
+src/testControl.i:
+	$(MAKE) -f CMakeFiles/testControl.dir/build.make CMakeFiles/testControl.dir/src/testControl.i
+.PHONY : src/testControl.i
+
+# target to generate assembly for a file
+src/testControl.s:
+	$(MAKE) -f CMakeFiles/testControl.dir/build.make CMakeFiles/testControl.dir/src/testControl.s
+.PHONY : src/testControl.s
+
+# target to build an object file
 src/vector_computation.o:
 	$(MAKE) -f CMakeFiles/vector_computation.dir/build.make CMakeFiles/vector_computation.dir/src/vector_computation.o
 .PHONY : src/vector_computation.o
@@ -440,12 +524,14 @@ help:
 	@echo "... ROSBUILD_genmsg_lisp"
 	@echo "... ROSBUILD_gensrv_cpp"
 	@echo "... ROSBUILD_gensrv_lisp"
+	@echo "... angleTransform"
 	@echo "... birdeye"
 	@echo "... clean-test-results"
 	@echo "... dummybird"
 	@echo "... edit_cache"
 	@echo "... highbird"
 	@echo "... quadSmart"
+	@echo "... quadView"
 	@echo "... rebuild_cache"
 	@echo "... rosbuild_precompile"
 	@echo "... rosbuild_premsgsrvgen"
@@ -456,8 +542,12 @@ help:
 	@echo "... test-future"
 	@echo "... test-results"
 	@echo "... test-results-run"
+	@echo "... testControl"
 	@echo "... tests"
 	@echo "... vector_computation"
+	@echo "... src/angleTransform.o"
+	@echo "... src/angleTransform.i"
+	@echo "... src/angleTransform.s"
 	@echo "... src/birdeye.o"
 	@echo "... src/birdeye.i"
 	@echo "... src/birdeye.s"
@@ -470,6 +560,12 @@ help:
 	@echo "... src/quadSmart.o"
 	@echo "... src/quadSmart.i"
 	@echo "... src/quadSmart.s"
+	@echo "... src/quadView.o"
+	@echo "... src/quadView.i"
+	@echo "... src/quadView.s"
+	@echo "... src/testControl.o"
+	@echo "... src/testControl.i"
+	@echo "... src/testControl.s"
 	@echo "... src/vector_computation.o"
 	@echo "... src/vector_computation.i"
 	@echo "... src/vector_computation.s"

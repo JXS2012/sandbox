@@ -2,11 +2,13 @@
 /home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/ROSBUILD_genmsg_lisp.dir
 /home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/ROSBUILD_gensrv_cpp.dir
 /home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/ROSBUILD_gensrv_lisp.dir
+/home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/angleTransform.dir
 /home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/birdeye.dir
 /home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/clean-test-results.dir
 /home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/dummybird.dir
 /home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/highbird.dir
 /home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/quadSmart.dir
+/home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/quadView.dir
 /home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/rosbuild_precompile.dir
 /home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/rosbuild_premsgsrvgen.dir
 /home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/rospack_genmsg.dir
@@ -16,5 +18,6 @@
 /home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/test-future.dir
 /home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/test-results.dir
 /home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/test-results-run.dir
+/home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/testControl.dir
 /home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/tests.dir
 /home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/vector_computation.dir

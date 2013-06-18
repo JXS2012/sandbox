@@ -34,6 +34,8 @@ class dummybird
 
   //constants
   double g,heli_mass;
+  std::string strThrustCmd,strActThrust,quadrotorType;
+  std::vector<double> thrust_cmd,act_thrust;
 
   //variables
   float thrust_in,pitch_in,roll_in,yaw_in;
@@ -47,6 +49,7 @@ class dummybird
   //take in desired acc and current psi angle, calculate control output to quadrotor
   void acc_des2control(double,double,double,double);
   double interpolate_thrust(double);
+  std::vector<double> readTable(std::string);
 
  public:
 
