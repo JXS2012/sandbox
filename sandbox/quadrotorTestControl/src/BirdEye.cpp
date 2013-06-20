@@ -1,6 +1,6 @@
-#include "birdeye.h"
+#include "BirdEye.h"
 
-birdeye::birdeye(ros::NodeHandle nh, ros::NodeHandle nh_private):
+BirdEye::BirdEye(ros::NodeHandle nh, ros::NodeHandle nh_private):
   nh_(nh), 
   nh_private_(nh_private)
 {
@@ -14,19 +14,19 @@ birdeye::birdeye(ros::NodeHandle nh, ros::NodeHandle nh_private):
 
 }
 
-birdeye::~birdeye()
+BirdEye::~BirdEye()
 {
   delete listener;
   delete transform;
   ROS_INFO("Destroying birdeye "); 
 }
 
-void birdeye::initiation()
+void BirdEye::initiation()
 {
-  init_position();
-  init_parameters();
+  initPosition();
+  initParameters();
   flightOrigin();
-  init_pointcloud();
+  initPointcloud();
 
   //defining pre points for later velocity calculation
   prePoint = originPoint;
@@ -34,7 +34,7 @@ void birdeye::initiation()
 
 }
 
-void birdeye::init_parameters()
+void BirdEye::initParameters()
 {
   if (!nh_private_.getParam("flight_radius", flight_radius))
     flight_radius = 300;
@@ -59,7 +59,7 @@ void birdeye::init_parameters()
   zeroVector.z = 0;
 }
 
-void birdeye::init_position()
+void BirdEye::initPosition()
 {
   currentPoint = zeroVector;
   prePoint = zeroVector;
@@ -74,7 +74,7 @@ void birdeye::init_position()
   theta = 0;
 }
 
-void birdeye::flightOrigin()
+void BirdEye::flightOrigin()
 {
   //finding start point of flight
   pcl::PointXYZ originAngle;
@@ -108,7 +108,7 @@ void birdeye::flightOrigin()
   accLog.push_back(zeroVector);
 }
 
-void birdeye::init_pointcloud()
+void BirdEye::initPointcloud()
 {
   cloud.reset(new pcl::PointCloud<pcl::PointXYZ>);
   cloud_vel.reset(new pcl::PointCloud<pcl::PointXYZ>);
@@ -142,7 +142,7 @@ void birdeye::init_pointcloud()
   kdtree.setInputCloud(cloud);
 }
 
-void birdeye::transformZYXtoZXY(double yaw, double pitch, double roll)
+void BirdEye::transformZYXtoZXY(double yaw, double pitch, double roll)
 {
     phi = asin(sin(roll)*cos(pitch));
     double psi_1 = cos(yaw)*sin(roll)*sin(pitch)-cos(roll)*sin(yaw);
@@ -151,7 +151,7 @@ void birdeye::transformZYXtoZXY(double yaw, double pitch, double roll)
     theta = atan2(tan(pitch),cos(roll));  
 }
 
-void birdeye::updateFlightStatus()
+void BirdEye::updateFlightStatus()
 {
   double roll,pitch,yaw;
 
@@ -177,15 +177,6 @@ void birdeye::updateFlightStatus()
   flightLog();
   
   //calculate velocity using one step differentiate, can be improved by moving average method.
-  /*
-  if (currentIndex >= averageStep)
-      prePoint = pointLog[currentIndex-averageStep];
-  else
-    prePoint = pointLog[0];
-
-  currentVel = scalarProduct(freq/averageStep, vectorMinus(currentPoint,prePoint));
-  */
-
   viconLostHandle();
   currentVel = differentiate(pointLog);
   velLog.push_back(currentVel);
@@ -193,7 +184,7 @@ void birdeye::updateFlightStatus()
   accLog.push_back(currentAcc);
 }
 
-pcl::PointXYZ birdeye::differentiate(const std::vector<pcl::PointXYZ>& x)
+pcl::PointXYZ BirdEye::differentiate(const std::vector<pcl::PointXYZ>& x)
 {
   pcl::PointXYZ dx;
   if (lostVicon)
@@ -233,7 +224,7 @@ pcl::PointXYZ birdeye::differentiate(const std::vector<pcl::PointXYZ>& x)
   return dx;
 }
 
-void birdeye::viconLostHandle()
+void BirdEye::viconLostHandle()
 {
   if (pointLog.size()<(unsigned)averageStep)
     {
@@ -254,7 +245,7 @@ void birdeye::viconLostHandle()
     }
 }
 
-bool birdeye::checkZeroVector(pcl::PointXYZ x)
+bool BirdEye::checkZeroVector(pcl::PointXYZ x)
 {
   if (x.x == 0 && x.y == 0 && x.z==0)
     return true;
@@ -262,38 +253,17 @@ bool birdeye::checkZeroVector(pcl::PointXYZ x)
     return false;
 }
 
-/*
-void birdeye::viconLostHandle()
-{
-  //when vicon recovered, recalculate currentVel using current point and last valid point, divided by duration of vicon lost
-  if (lostVicon && (currentVel.x != 0 || currentVel.y != 0 || currentVel.z != 0))
-    {
-      currentVel = scalarProduct(freq/freezeCounter, vectorMinus(currentPoint,prePoint));
-      freezeCounter = 0;
-    }
-
-  //detect vicon lost and measure the duration of vicon lost
-  if (currentVel.x == 0 && currentVel.y == 0 && currentVel.z ==0)
-    {
-      lostVicon = true;
-      freezeCounter ++;
-    }
-  else
-    lostVicon = false;  
-
-}
-*/
-void birdeye::updateIntError(pcl::PointXYZ targetPoint)
+void BirdEye::updateIntError(pcl::PointXYZ targetPoint)
 {
   intError = vectorPlus(intError, vectorMinus(currentPoint,targetPoint) );
 }
 
-void birdeye::resetIntError()
+void BirdEye::resetIntError()
 {
   intError = zeroVector;
 }
 
-void birdeye::flightLog()
+void BirdEye::flightLog()
 {
   currentIndex++;
   pointLog.push_back(currentPoint);
@@ -305,7 +275,7 @@ void birdeye::flightLog()
   angleLog.push_back(tempAngle);
 }
 
-void birdeye::calculate_position_velocity_error()
+void BirdEye::calculatePositionVelocityError()
 {
   std::vector<int> pointIdxNKNSearch(1);
   std::vector<float> pointNKNSquaredDistance(1);
@@ -337,128 +307,4 @@ void birdeye::calculate_position_velocity_error()
     }
 }
 
-pcl::PointXYZ birdeye::getShiftedOrigin()
-{
-  return shiftedOrigin;
-}
 
-pcl::PointXYZ birdeye::getStartPoint()
-{
-  return cloud->points[0];
-}
-
-pcl::PointXYZ birdeye::getCurrentPoint()
-{
-  return currentPoint;
-}
- 
-pcl::PointXYZ birdeye::getOriginPoint()
-{
-  return originPoint;
-}
-
-pcl::PointXYZ birdeye::getE_p()
-{
-  return e_p;
-}
- 
-pcl::PointXYZ birdeye::getE_v()
-{
-  return e_v;
-}
- 
-pcl::PointXYZ birdeye::getAcc_t()
-{
-  return acc_t;
-}
- 
-pcl::PointXYZ birdeye::getCurrentVel()
-{
-  return currentVel;
-}
-
-pcl::PointXYZ birdeye::getIntError()
-{
-  return intError;
-}
-
-double birdeye::getPhi()
-{
-  return phi;
-}
- 
-double birdeye::getPsi()
-{
-  return psi;
-}
- 
-double birdeye::getTheta()
-{
-  return theta;
-}
-
-float birdeye::getLog_x(int i)
-{
-  return pointLog[i].x;
-}
-
-float birdeye::getLog_y(int i)
-{
-  return pointLog[i].y;
-}
-
-float birdeye::getLog_z(int i)
-{
-  return pointLog[i].z;
-}
-
-float birdeye::getLog_phi(int i)
-{
-  return angleLog[i].x;
-}
-
-float birdeye::getLog_theta(int i)
-{
-  return angleLog[i].y;
-}
-
-float birdeye::getLog_psi(int i)
-{
-  return angleLog[i].z;
-}
-
-float birdeye::getLog_velX(int i)
-{
-  return velLog[i].x;
-}
-
-float birdeye::getLog_velY(int i)
-{
-  return velLog[i].y;
-}
-
-float birdeye::getLog_velZ(int i)
-{
-  return velLog[i].z;
-}
-
-float birdeye::getLog_accX(int i)
-{
-  return accLog[i].x;
-}
-
-float birdeye::getLog_accY(int i)
-{
-  return accLog[i].y;
-}
-
-float birdeye::getLog_accZ(int i)
-{
-  return accLog[i].z;
-}
-
-
-int birdeye::getLogSize()
-{
-  return pointLog.size();
-}

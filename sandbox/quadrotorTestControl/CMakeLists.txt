@@ -28,29 +28,26 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #rosbuild_link_boost(${PROJECT_NAME} thread)
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
-rosbuild_add_library(vector_computation src/vector_computation)
+rosbuild_add_library(VectorComputation src/VectorComputation)
 
-#rosbuild_add_library(quadrotor src/quadrotor.cpp)
-#target_link_libraries(quadrotor vector_computation)
+rosbuild_add_library(DummyBird src/DummyBird.cpp)
+target_link_libraries(DummyBird VectorComputation)
 
-rosbuild_add_library(dummybird src/dummybird.cpp)
-target_link_libraries(dummybird vector_computation)
+rosbuild_add_library(BirdEye src/BirdEye.cpp)
+target_link_libraries(BirdEye VectorComputation)
 
-rosbuild_add_library(birdeye src/birdeye.cpp)
-target_link_libraries(birdeye vector_computation)
-
-rosbuild_add_library(highbird src/highbird.cpp)
-target_link_libraries(highbird dummybird)
-target_link_libraries(highbird birdeye)
+rosbuild_add_library(HighBird src/HighBird.cpp)
+target_link_libraries(HighBird DummyBird)
+target_link_libraries(HighBird BirdEye)
 
 #rosbuild_add_library(smartbird src/smartbird.cpp)
 #target_link_libraries(smartbird dummybird)
 
 rosbuild_add_executable(quadSmart src/quadSmart.cpp)
-target_link_libraries(quadSmart highbird)
+target_link_libraries(quadSmart HighBird)
 
 rosbuild_add_executable(quadView src/quadView.cpp)
-target_link_libraries(quadView birdeye)
+target_link_libraries(quadView BirdEye)
 
 #rosbuild_add_executable(quadFlight src/quadFlight.cpp)
 #target_link_libraries(quadFlight quadrotor)

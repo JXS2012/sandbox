@@ -5,14 +5,14 @@
 
 #include <pcl/point_cloud.h>
 #include <pcl/kdtree/kdtree_flann.h>
-#include "vector_computation.h"
+#include "VectorComputation.h"
 
 #include "math.h"
 #include <sstream>
 #include <vector>
 #include <stdio.h>
 
-class birdeye
+class BirdEye
 {
  private:
   //ros related
@@ -44,10 +44,10 @@ class birdeye
   //functions
   //initiation
   void initiation();
-  void init_position(); //init x,y,z,x_pre,.. 
-  void init_parameters();
+  void initPosition(); //init x,y,z,x_pre,.. 
+  void initParameters();
   void flightOrigin();
-  void init_pointcloud(); //initiate path
+  void initPointcloud(); //initiate path
 
   //in flight data updating
   void transformZYXtoZXY(double,double,double);
@@ -61,42 +61,104 @@ class birdeye
   bool checkZeroVector(pcl::PointXYZ);
 
  public:
-  birdeye(ros::NodeHandle nh, ros::NodeHandle nh_private);
-  virtual ~birdeye();
+  BirdEye(ros::NodeHandle nh, ros::NodeHandle nh_private);
+  virtual ~BirdEye();
 
   //in flight data updating
   void updateFlightStatus(); //update current position,velocity,etc
   void updateIntError(pcl::PointXYZ); //update integrated error for hover
   void resetIntError(); //reset integrated error to zero
-  void calculate_position_velocity_error(); //used for path control
+  void calculatePositionVelocityError(); //used for path control
 
   //getters
-  pcl::PointXYZ getShiftedOrigin();
-  pcl::PointXYZ getStartPoint();
-  pcl::PointXYZ getCurrentPoint();
-  pcl::PointXYZ getOriginPoint();
-  pcl::PointXYZ getE_p();
-  pcl::PointXYZ getE_v();
-  pcl::PointXYZ getAcc_t();
-  pcl::PointXYZ getCurrentVel();
-  pcl::PointXYZ getIntError();
+  inline pcl::PointXYZ getShiftedOrigin()
+  {
+    return shiftedOrigin;
+  }
 
-  double getPhi();
-  double getPsi();
-  double getTheta();
+  inline pcl::PointXYZ getStartPoint()
+  {
+    return cloud->points[0];
+  }
 
-  float getLog_x(int);
-  float getLog_y(int);
-  float getLog_z(int);
-  float getLog_phi(int);
-  float getLog_theta(int);
-  float getLog_psi(int);
-  float getLog_velX(int);
-  float getLog_velY(int);
-  float getLog_velZ(int);
-  float getLog_accX(int);
-  float getLog_accY(int);
-  float getLog_accZ(int);
+  inline pcl::PointXYZ getCurrentPoint()
+  {
+    return currentPoint;
+  }
+ 
+  inline pcl::PointXYZ getOriginPoint()
+  {
+    return originPoint;
+  }
 
-  int getLogSize();
+  inline pcl::PointXYZ getE_p()
+  {
+    return e_p;
+  }
+ 
+  inline pcl::PointXYZ getE_v()
+  {
+    return e_v;
+  }
+ 
+  inline pcl::PointXYZ getAcc_t()
+  {
+    return acc_t;
+  }
+ 
+  inline pcl::PointXYZ getCurrentVel()
+  {
+    return currentVel;
+  }
+
+  inline pcl::PointXYZ getCurrentAcc()
+  {
+    return currentAcc;
+  }
+
+  inline pcl::PointXYZ getIntError()
+  {
+    return intError;
+  }
+
+  inline double getPhi()
+  {
+    return phi;
+  }
+ 
+  inline double getPsi()
+  {
+    return psi;
+  }
+ 
+  inline double getTheta()
+  {
+    return theta;
+  }
+
+  inline pcl::PointXYZ getLogPos(int i)
+  {
+    return pointLog[i];
+  }
+
+  inline pcl::PointXYZ getLogAngle(int i)
+  {
+    return angleLog[i];
+  }
+
+  inline pcl::PointXYZ getLogVel(int i)
+  {
+    return velLog[i];
+  }
+
+  inline pcl::PointXYZ getLogAcc(int i)
+  {
+    return accLog[i];
+  }
+
+  inline int getLogSize()
+  {
+    return pointLog.size();
+  }
+
 };

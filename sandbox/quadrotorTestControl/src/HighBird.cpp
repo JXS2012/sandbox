@@ -1,40 +1,40 @@
-#include "highbird.h"
+#include "HighBird.h"
 
-highbird::highbird(ros::NodeHandle nh, ros::NodeHandle nh_private):
+HighBird::HighBird(ros::NodeHandle nh, ros::NodeHandle nh_private):
   nh_(nh), 
   nh_private_(nh_private)
 {
 
-  ros::NodeHandle node  (nh_,"highbird");
+  ros::NodeHandle node  (nh_,"HighBird");
 
-  dummy = new dummybird(nh_,nh_private_);
-  eye = new birdeye(nh_,nh_private_);
+  dummy = new DummyBird(nh_,nh_private_);
+  eye = new BirdEye(nh_,nh_private_);
 
   initiation();
   //initiate variables
 
 }
 
-highbird::~highbird()
+HighBird::~HighBird()
 {
 
   delete dummy;
   delete eye;
-  ROS_INFO("Destroying highbird "); 
+  ROS_INFO("Destroying HighBird "); 
 
 }
 
-void highbird::initiation()
+void HighBird::initiation()
 {
   initParameters();
 
   //defining first flight target point
-  targetPoint = eye->getStartPoint();
+  //targetPoint = eye->getStartPoint();
 
   //readTargets();
   
-  //targetPoint = eye->getOriginPoint();
-  //targetPoint.z += flight_height;
+  targetPoint = eye->getOriginPoint();
+  targetPoint.z += flight_height;
   //targetPoint.x += flight_height;
   //targetPoint.y += flight_height;
 
@@ -44,7 +44,7 @@ void highbird::initiation()
     dummy->on();
 }
 
-void highbird::readTargets()
+void HighBird::readTargets()
 {
   pcl::PointXYZ temp;
   std::istringstream iss(strTargets);
@@ -66,7 +66,7 @@ void highbird::readTargets()
   targetPoint = targets[0];
 }
 
-void highbird::initParameters()
+void HighBird::initParameters()
 {
   if (!nh_private_.getParam("flight_height", flight_height))
     flight_height = 300; //unit mm
@@ -102,33 +102,30 @@ void highbird::initParameters()
   hover = true;
 }
 
-void highbird::invokeController()
+void HighBird::invokeController()
 {
   //in case vicon lost track of model
   if (eye->getCurrentVel().x == 0 && eye->getCurrentVel().y == 0 && eye->getCurrentVel().z == 0)
     {
-      dummy->direct_drive(0,0,0,eye->getPsi());
+      dummy->directDrive(0,0,0,eye->getPsi());
     }
   else
     {
       if (hover)
 	{
 	  eye->updateIntError(targetPoint);
-	  dummy->pid_hover_controller(vectorMinus(eye->getCurrentPoint(),targetPoint),eye->getCurrentVel(),eye->getIntError(),eye->getPsi());
+	  //dummy->pidHoverController(vectorMinus(eye->getCurrentPoint(),targetPoint),eye->getCurrentVel(),eye->getIntError(),eye->getPsi());
+	  dummy->pidHoverVelController(vectorMinus(eye->getCurrentPoint(),targetPoint),eye->getCurrentVel(),eye->getCurrentAcc(),eye->getIntError(),eye->getPsi());
 	}
       else
 	{
-	  eye->calculate_position_velocity_error();
-	  dummy->pid_path_controller(eye->getE_p(),eye->getE_v(),eye->getAcc_t(),eye->getPsi());
+	  eye->calculatePositionVelocityError();
+	  dummy->pidPathController(eye->getE_p(),eye->getE_v(),eye->getAcc_t(),eye->getPsi());
 	}
-      /*
-      dummy->pid_hover_controller(vectorMinus(eye->getCurrentPoint(),targetPoint),eye->getCurrentVel(),eye->getIntError(),eye->getPsi());
-      */
-
     }
 }
 
-void highbird::checkStartPoint()
+void HighBird::checkStartPoint()
 {
   if (norm(vectorMinus(eye->getCurrentPoint(),eye->getStartPoint()))<100 && !reachStartPoint)
     {
@@ -138,7 +135,7 @@ void highbird::checkStartPoint()
     }
 }
 
-void highbird::safeOutRange()
+void HighBird::safeOutRange()
 {
   pcl::PointXYZ temp = eye->getShiftedOrigin();
   temp.z = eye->getCurrentPoint().z;
@@ -162,7 +159,7 @@ void highbird::safeOutRange()
     }
 }
 
-void highbird::land()
+void HighBird::land()
 {
   //if counter over 800, start landing
   if (counter > total_time*freq && !landing)
@@ -182,32 +179,32 @@ void highbird::land()
     }    
 }
 
-void highbird::switchHover()
+void HighBird::switchHover()
 {
   hover = true;
   eye->resetIntError();
 }
 
-void highbird::hoverFlight()
+void HighBird::hoverFlight()
 {
   if ( norm(vectorMinus(eye->getCurrentPoint(),targetPoint))<50 
        && (unsigned)targetIndex < targets.size()-1 )
     switchNextTarget();
 }
 
-void highbird::switchNextTarget()
+void HighBird::switchNextTarget()
 {
   targetPoint = targets[++targetIndex];
   switchHover();
 }
 
-void highbird::drive()
+void HighBird::drive()
 {
   //update flight status
   eye->updateFlightStatus();
   
   //check whether arrived at start point
-  checkStartPoint();
+  //checkStartPoint();
 
   //hover to points
   //hoverFlight();
@@ -224,12 +221,12 @@ void highbird::drive()
   counter ++;
 }
 
-bool highbird::finish()
+bool HighBird::finish()
 {
   return highbird_finish;
 }
 
-void highbird::write_log()
+void HighBird::writeLog()
 {
   std::FILE * pFile;
 
@@ -237,7 +234,8 @@ void highbird::write_log()
   if (pFile!=NULL)
     {
       for (int i = 0; i<eye->getLogSize();i++)
-	fprintf(pFile, "x %.3f y %.3f z %.3f phi %.3f theta %.3f psi %.3f roll %.6f pitch %.6f thrust %.6f\n", eye->getLog_x(i), eye->getLog_y(i), eye->getLog_z(i), eye->getLog_phi(i),eye->getLog_theta(i),eye->getLog_psi(i), dummy->getLog_roll(i), dummy->getLog_pitch(i), dummy->getLog_thrust(i));
+	//fprintf(pFile, "x %.3f y %.3f z %.3f phi %.3f theta %.3f psi %.3f roll %.6f pitch %.6f thrust %.6f\n", eye->getLogPos(i).x, eye->getLogPos(i).y, eye->getLogPos(i).z, eye->getLogAngle(i).x,eye->getLogAngle(i).y,eye->getLogAngle(i).z, dummy->getLogRoll(i), dummy->getLogPitch(i), dummy->getLogThrust(i));
+	fprintf(pFile, "x %.3f y %.3f z %.3f vx %.3f vy %.3f vz %.3f ax %.3f ay %.3f az %.3f roll %.6f pitch %.6f thrust %.6f\n", eye->getLogPos(i).x, eye->getLogPos(i).y, eye->getLogPos(i).z, eye->getLogVel(i).x,eye->getLogVel(i).y,eye->getLogVel(i).z, eye->getLogAcc(i).x, eye->getLogAcc(i).y, eye->getLogAcc(i).z, dummy->getLogRoll(i), dummy->getLogPitch(i), dummy->getLogThrust(i));
     }
   
 }

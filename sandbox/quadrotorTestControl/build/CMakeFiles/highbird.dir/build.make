@@ -146,8 +146,8 @@ highbird_OBJECTS = \
 highbird_EXTERNAL_OBJECTS =
 
 ../lib/libhighbird.so: CMakeFiles/highbird.dir/src/highbird.o
-../lib/libhighbird.so: ../lib/libdummybird.so
-../lib/libhighbird.so: ../lib/libbirdeye.so
+../lib/libhighbird.so: ../lib/libDummyBird.so
+../lib/libhighbird.so: ../lib/libBirdEye.so
 ../lib/libhighbird.so: ../lib/libvector_computation.so
 ../lib/libhighbird.so: CMakeFiles/highbird.dir/build.make
 ../lib/libhighbird.so: CMakeFiles/highbird.dir/link.txt

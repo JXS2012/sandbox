@@ -55,7 +55,7 @@ int main(int argc, char** argv){
       ROS_ERROR("%s",ex.what());
     }
 
-    btMatrix3x3(transform.getRotation()).getEulerZYX(yaw,pitch,roll);
+    btMatrix3x3(transform.getRotation()).getEulerYPR(yaw,pitch,roll);
     //printf("ZYX roll %.3f pitch %.3f yaw %.3f\n",roll,pitch,yaw);
     
     phi = asin(sin(roll)*cos(pitch));
@@ -93,7 +93,7 @@ void write_log()
   pFile = fopen("angleTransfrom.txt","w");
   if (pFile!=NULL)
     {
-      for (int i = 0; i<x_log.size();i++)
+      for (int i = 0; (unsigned)i<x_log.size();i++)
 	fprintf(pFile, "x %.3f y %.3f z %.3f roll %.3f pitch %.3f yaw %.3f\n", x_log[i], y_log[i], z_log[i], roll_log[i], pitch_log[i], yaw_log[i]);
     }
   

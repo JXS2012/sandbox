@@ -1,7 +1,7 @@
 #include <ros/ros.h>
-#include "highbird.h"
+#include "HighBird.h"
 
-highbird *bird;
+HighBird *bird;
 
 void timerCallback(const ros::TimerEvent&)
 {
@@ -20,7 +20,7 @@ int main(int argc, char** argv)
     freq = 30.0;
   ROS_INFO("call back freq %.3f",freq);
 
-  bird = new highbird(nh,nh_private);
+  bird = new HighBird(nh,nh_private);
   ROS_INFO("create bird");
 
   ros::Timer timer = nh.createTimer(ros::Duration(1.0/freq),timerCallback);
@@ -29,7 +29,7 @@ int main(int argc, char** argv)
   while (nh.ok() && !bird->finish())
     ros::spinOnce();
 
-  bird->write_log();
+  bird->writeLog();
 
   delete bird;
   return 0;

@@ -10,7 +10,7 @@ SET(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Targets to which this target links.
 SET(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/dummybird.dir/DependInfo.cmake"
-  "/home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/birdeye.dir/DependInfo.cmake"
+  "/home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/DummyBird.dir/DependInfo.cmake"
+  "/home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/BirdEye.dir/DependInfo.cmake"
   "/home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/build/CMakeFiles/vector_computation.dir/DependInfo.cmake"
   )

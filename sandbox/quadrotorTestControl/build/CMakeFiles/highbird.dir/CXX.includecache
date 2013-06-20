@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-../include/birdeye.h
+../include/BirdEye.h
 ros/ros.h
 -
 tf/transform_listener.h
@@ -30,7 +30,7 @@ vector
 stdio.h
 -
 
-../include/dummybird.h
+../include/DummyBird.h
 ros/ros.h
 -
 mav_srvs/SetMotorsOnOff.h
@@ -51,10 +51,10 @@ vector
 ../include/highbird.h
 ros/ros.h
 -
-birdeye.h
-../include/birdeye.h
-dummybird.h
-../include/dummybird.h
+BirdEye.h
+../include/BirdEye.h
+DummyBird.h
+../include/DummyBird.h
 pcl/point_cloud.h
 -
 pcl/kdtree/kdtree_flann.h

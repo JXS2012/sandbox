@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-../include/birdeye.h
+../include/BirdEye.h
 ros/ros.h
 -
 tf/transform_listener.h
@@ -19,8 +19,8 @@ pcl/point_cloud.h
 -
 pcl/kdtree/kdtree_flann.h
 -
-vector_computation.h
-../include/vector_computation.h
+VectorComputation.h
+../include/VectorComputation.h
 math.h
 ../include/math.h
 sstream
@@ -30,7 +30,7 @@ vector
 stdio.h
 -
 
-../include/dummybird.h
+../include/DummyBird.h
 ros/ros.h
 -
 mav_srvs/SetMotorsOnOff.h
@@ -41,26 +41,26 @@ std_msgs/Float64.h
 ../include/std_msgs/Float64.h
 pcl/point_cloud.h
 -
-vector_computation.h
-../include/vector_computation.h
+VectorComputation.h
+../include/VectorComputation.h
 math.h
 ../include/math.h
 vector
 -
 
-../include/highbird.h
+../include/HighBird.h
 ros/ros.h
 -
-birdeye.h
-../include/birdeye.h
-dummybird.h
-../include/dummybird.h
+BirdEye.h
+../include/BirdEye.h
+DummyBird.h
+../include/DummyBird.h
 pcl/point_cloud.h
 -
 pcl/kdtree/kdtree_flann.h
 -
-vector_computation.h
-../include/vector_computation.h
+VectorComputation.h
+../include/VectorComputation.h
 math.h
 ../include/math.h
 vector
@@ -74,7 +74,7 @@ sstream
 string
 -
 
-../include/vector_computation.h
+../include/VectorComputation.h
 pcl/point_cloud.h
 -
 pcl/kdtree/kdtree_flann.h
@@ -131,8 +131,8 @@ ros/service_traits.h
 /home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/src/quadSmart.cpp
 ros/ros.h
 -
-highbird.h
-/home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/src/highbird.h
+HighBird.h
+/home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/src/HighBird.h
 
 /opt/ros/electric/stacks/bullet/include/LinearMath/btMatrix3x3.h
 btVector3.h

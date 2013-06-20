@@ -146,8 +146,8 @@ quadView_OBJECTS = \
 quadView_EXTERNAL_OBJECTS =
 
 ../bin/quadView: CMakeFiles/quadView.dir/src/quadView.o
-../bin/quadView: ../lib/libbirdeye.so
-../bin/quadView: ../lib/libvector_computation.so
+../bin/quadView: ../lib/libBirdEye.so
+../bin/quadView: ../lib/libVectorComputation.so
 ../bin/quadView: CMakeFiles/quadView.dir/build.make
 ../bin/quadView: CMakeFiles/quadView.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable ../bin/quadView"

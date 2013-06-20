@@ -1,10 +1,10 @@
 #include <ros/ros.h>
-#include "birdeye.h"
-#include "dummybird.h"
+#include "BirdEye.h"
+#include "DummyBird.h"
 
 #include <pcl/point_cloud.h>
 #include <pcl/kdtree/kdtree_flann.h>
-#include "vector_computation.h"
+#include "VectorComputation.h"
 
 #include "math.h"
 #include <vector>
@@ -13,11 +13,11 @@
 #include <sstream>
 #include <string>
 
-class highbird
+class HighBird
 {
  private:
-  dummybird *dummy;
-  birdeye *eye;
+  DummyBird *dummy;
+  BirdEye *eye;
 
   ros::NodeHandle nh_;
   ros::NodeHandle nh_private_;
@@ -58,13 +58,13 @@ class highbird
   void switchNextTarget();
 
  public:
-  highbird(ros::NodeHandle nh, ros::NodeHandle nh_private);
-  virtual ~highbird();
+  HighBird(ros::NodeHandle nh, ros::NodeHandle nh_private);
+  virtual ~HighBird();
 
   //drive quadrotor to achieve goals
   void drive();
   //store flight data(x,y,z,roll,pitch,yaw,control inputs)
-  void write_log();
+  void writeLog();
   //return true when finished flying
   bool finish();
 };

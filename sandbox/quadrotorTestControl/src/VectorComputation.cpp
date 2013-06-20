@@ -1,4 +1,4 @@
-#include "vector_computation.h"
+#include "VectorComputation.h"
 
 double norm(pcl::PointXYZ input)
 {

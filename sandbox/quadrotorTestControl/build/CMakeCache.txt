@@ -14,6 +14,9 @@
 # EXTERNAL cache entries
 ########################
 
+//Dependencies for the target
+BirdEye_LIB_DEPENDS:STATIC=general;pcl_ros_tf;general;nodeletlib;general;uuid;general;poco_lite;general;boost_fs_wrapper;general;tinyxml;general;bondcpp;general;dynamic_reconfigure_config_init_mutex;general;tf;general;BulletDynamics;general;BulletCollision;general;LinearMath;general;message_filters;general;pcl_common;general;pcl_filters;general;pcl_features;general;pcl_io;general;pcl_surface;general;pcl_registration;general;pcl_sample_consensus;general;pcl_kdtree;general;pcl_segmentation;general;pcl_keypoints;general;pcl_range_image;general;pcl_range_image_border_extractor;general;pcl_visualization;general;pcl_octree;general;sensor_msgs;general;rosbag;general;topic_tools;general;ros;general;boost_signals-mt;general;roscpp_serialization;general;XmlRpc;general;roslib;general;rospack;general;rosstack;general;rosconsole;general;boost_thread-mt;general;log4cxx;general;rostime;general;cpp_common;general;cminpack;general;flann;general;flann_cpp;general;hdf5_cpp;general;hdf5;general;VectorComputation;
+
 //Path to a program.
 CMAKE_AR:FILEPATH=/usr/bin/ar
 
@@ -155,11 +158,17 @@ CMAKE_USE_RELATIVE_PATHS:BOOL=OFF
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
+//Dependencies for the target
+DummyBird_LIB_DEPENDS:STATIC=general;pcl_ros_tf;general;nodeletlib;general;uuid;general;poco_lite;general;boost_fs_wrapper;general;tinyxml;general;bondcpp;general;dynamic_reconfigure_config_init_mutex;general;tf;general;BulletDynamics;general;BulletCollision;general;LinearMath;general;message_filters;general;pcl_common;general;pcl_filters;general;pcl_features;general;pcl_io;general;pcl_surface;general;pcl_registration;general;pcl_sample_consensus;general;pcl_kdtree;general;pcl_segmentation;general;pcl_keypoints;general;pcl_range_image;general;pcl_range_image_border_extractor;general;pcl_visualization;general;pcl_octree;general;sensor_msgs;general;rosbag;general;topic_tools;general;ros;general;boost_signals-mt;general;roscpp_serialization;general;XmlRpc;general;roslib;general;rospack;general;rosstack;general;rosconsole;general;boost_thread-mt;general;log4cxx;general;rostime;general;cpp_common;general;cminpack;general;flann;general;flann_cpp;general;hdf5_cpp;general;hdf5;general;VectorComputation;
+
 //Single output directory for building all executables.
 EXECUTABLE_OUTPUT_PATH:PATH=
 
 //gtest-config executable
 GTEST_EXE:FILEPATH=/usr/bin/gtest-config
+
+//Dependencies for the target
+HighBird_LIB_DEPENDS:STATIC=general;pcl_ros_tf;general;nodeletlib;general;uuid;general;poco_lite;general;boost_fs_wrapper;general;tinyxml;general;bondcpp;general;dynamic_reconfigure_config_init_mutex;general;tf;general;BulletDynamics;general;BulletCollision;general;LinearMath;general;message_filters;general;pcl_common;general;pcl_filters;general;pcl_features;general;pcl_io;general;pcl_surface;general;pcl_registration;general;pcl_sample_consensus;general;pcl_kdtree;general;pcl_segmentation;general;pcl_keypoints;general;pcl_range_image;general;pcl_range_image_border_extractor;general;pcl_visualization;general;pcl_octree;general;sensor_msgs;general;rosbag;general;topic_tools;general;ros;general;boost_signals-mt;general;roscpp_serialization;general;XmlRpc;general;roslib;general;rospack;general;rosstack;general;rosconsole;general;boost_thread-mt;general;log4cxx;general;rostime;general;cpp_common;general;cminpack;general;flann;general;flann_cpp;general;hdf5_cpp;general;hdf5;general;DummyBird;general;BirdEye;
 
 //Single output directory for building all libraries.
 LIBRARY_OUTPUT_PATH:PATH=
@@ -185,6 +194,9 @@ TOOLCHAINCONFIG:FILEPATH=TOOLCHAINCONFIG-NOTFOUND
 //Path to a file.
 USERCONFIG:FILEPATH=USERCONFIG-NOTFOUND
 
+//Dependencies for the target
+VectorComputation_LIB_DEPENDS:STATIC=general;pcl_ros_tf;general;nodeletlib;general;uuid;general;poco_lite;general;boost_fs_wrapper;general;tinyxml;general;bondcpp;general;dynamic_reconfigure_config_init_mutex;general;tf;general;BulletDynamics;general;BulletCollision;general;LinearMath;general;message_filters;general;pcl_common;general;pcl_filters;general;pcl_features;general;pcl_io;general;pcl_surface;general;pcl_registration;general;pcl_sample_consensus;general;pcl_kdtree;general;pcl_segmentation;general;pcl_keypoints;general;pcl_range_image;general;pcl_range_image_border_extractor;general;pcl_visualization;general;pcl_octree;general;sensor_msgs;general;rosbag;general;topic_tools;general;ros;general;boost_signals-mt;general;roscpp_serialization;general;XmlRpc;general;roslib;general;rospack;general;rosstack;general;rosconsole;general;boost_thread-mt;general;log4cxx;general;rostime;general;cpp_common;general;cminpack;general;flann;general;flann_cpp;general;hdf5_cpp;general;hdf5;
+
 //Path to a file.
 _file_name:FILEPATH=/home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/src/angleTransform.cpp
 
@@ -195,7 +207,7 @@ birdeye_LIB_DEPENDS:STATIC=general;pcl_ros_tf;general;nodeletlib;general;uuid;ge
 dummybird_LIB_DEPENDS:STATIC=general;pcl_ros_tf;general;nodeletlib;general;uuid;general;poco_lite;general;boost_fs_wrapper;general;tinyxml;general;bondcpp;general;dynamic_reconfigure_config_init_mutex;general;tf;general;BulletDynamics;general;BulletCollision;general;LinearMath;general;message_filters;general;pcl_common;general;pcl_filters;general;pcl_features;general;pcl_io;general;pcl_surface;general;pcl_registration;general;pcl_sample_consensus;general;pcl_kdtree;general;pcl_segmentation;general;pcl_keypoints;general;pcl_range_image;general;pcl_range_image_border_extractor;general;pcl_visualization;general;pcl_octree;general;sensor_msgs;general;rosbag;general;topic_tools;general;ros;general;boost_signals-mt;general;roscpp_serialization;general;XmlRpc;general;roslib;general;rospack;general;rosstack;general;rosconsole;general;boost_thread-mt;general;log4cxx;general;rostime;general;cpp_common;general;cminpack;general;flann;general;flann_cpp;general;hdf5_cpp;general;hdf5;general;vector_computation;
 
 //Dependencies for the target
-highbird_LIB_DEPENDS:STATIC=general;pcl_ros_tf;general;nodeletlib;general;uuid;general;poco_lite;general;boost_fs_wrapper;general;tinyxml;general;bondcpp;general;dynamic_reconfigure_config_init_mutex;general;tf;general;BulletDynamics;general;BulletCollision;general;LinearMath;general;message_filters;general;pcl_common;general;pcl_filters;general;pcl_features;general;pcl_io;general;pcl_surface;general;pcl_registration;general;pcl_sample_consensus;general;pcl_kdtree;general;pcl_segmentation;general;pcl_keypoints;general;pcl_range_image;general;pcl_range_image_border_extractor;general;pcl_visualization;general;pcl_octree;general;sensor_msgs;general;rosbag;general;topic_tools;general;ros;general;boost_signals-mt;general;roscpp_serialization;general;XmlRpc;general;roslib;general;rospack;general;rosstack;general;rosconsole;general;boost_thread-mt;general;log4cxx;general;rostime;general;cpp_common;general;cminpack;general;flann;general;flann_cpp;general;hdf5_cpp;general;hdf5;general;dummybird;general;birdeye;
+highbird_LIB_DEPENDS:STATIC=general;pcl_ros_tf;general;nodeletlib;general;uuid;general;poco_lite;general;boost_fs_wrapper;general;tinyxml;general;bondcpp;general;dynamic_reconfigure_config_init_mutex;general;tf;general;BulletDynamics;general;BulletCollision;general;LinearMath;general;message_filters;general;pcl_common;general;pcl_filters;general;pcl_features;general;pcl_io;general;pcl_surface;general;pcl_registration;general;pcl_sample_consensus;general;pcl_kdtree;general;pcl_segmentation;general;pcl_keypoints;general;pcl_range_image;general;pcl_range_image_border_extractor;general;pcl_visualization;general;pcl_octree;general;sensor_msgs;general;rosbag;general;topic_tools;general;ros;general;boost_signals-mt;general;roscpp_serialization;general;XmlRpc;general;roslib;general;rospack;general;rosstack;general;rosconsole;general;boost_thread-mt;general;log4cxx;general;rostime;general;cpp_common;general;cminpack;general;flann;general;flann_cpp;general;hdf5_cpp;general;hdf5;general;DummyBird;general;BirdEye;
 
 //Dependencies for the target
 quadController_simple_LIB_DEPENDS:STATIC=general;pcl_ros_tf;general;nodeletlib;general;uuid;general;poco_lite;general;boost_fs_wrapper;general;tinyxml;general;bondcpp;general;dynamic_reconfigure_config_init_mutex;general;tf;general;BulletDynamics;general;BulletCollision;general;LinearMath;general;message_filters;general;pcl_common;general;pcl_filters;general;pcl_features;general;pcl_io;general;pcl_surface;general;pcl_registration;general;pcl_sample_consensus;general;pcl_kdtree;general;pcl_segmentation;general;pcl_keypoints;general;pcl_range_image;general;pcl_range_image_border_extractor;general;pcl_visualization;general;pcl_octree;general;sensor_msgs;general;rosbag;general;topic_tools;general;ros;general;boost_signals-mt;general;roscpp_serialization;general;XmlRpc;general;roslib;general;rospack;general;rosstack;general;rosconsole;general;boost_thread-mt;general;log4cxx;general;rostime;general;cpp_common;general;cminpack;general;flann;general;flann_cpp;general;hdf5_cpp;general;hdf5;general;vector_computation;

@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-../include/birdeye.h
+../include/BirdEye.h
 ros/ros.h
 -
 tf/transform_listener.h
@@ -19,8 +19,8 @@ pcl/point_cloud.h
 -
 pcl/kdtree/kdtree_flann.h
 -
-vector_computation.h
-../include/vector_computation.h
+VectorComputation.h
+../include/VectorComputation.h
 math.h
 ../include/math.h
 sstream
@@ -30,7 +30,7 @@ vector
 stdio.h
 -
 
-../include/vector_computation.h
+../include/VectorComputation.h
 pcl/point_cloud.h
 -
 pcl/kdtree/kdtree_flann.h
@@ -39,8 +39,8 @@ pcl/kdtree/kdtree_flann.h
 /home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/src/quadView.cpp
 ros/ros.h
 -
-birdeye.h
-/home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/src/birdeye.h
+BirdEye.h
+/home/jianxin/my_ros_workspace/sandbox/quadrotorTestControl/src/BirdEye.h
 
 /opt/ros/electric/stacks/bullet/include/LinearMath/btMatrix3x3.h
 btVector3.h

@@ -4,13 +4,13 @@
 #include "std_msgs/Float64.h"
 
 #include <pcl/point_cloud.h>
-#include "vector_computation.h"
+#include "VectorComputation.h"
 
 #include "math.h"
 #include <vector>
 
 
-class dummybird
+class DummyBird
 {
  private:
   //direct control related
@@ -35,37 +35,48 @@ class dummybird
   //constants
   double g,heli_mass;
   std::string strThrustCmd,strActThrust,quadrotorType;
-  std::vector<double> thrust_cmd,act_thrust;
+  std::vector<double> thrustCmd,actualThrust;
+  pcl::PointXYZ kdHover,kpHover,kiHover,kdHoverVel,kpHoverVel,kiHoverVel,kdPath,kpPath;
 
   //variables
-  float thrust_in,pitch_in,roll_in,yaw_in;
   std::vector<float> pitch_log,roll_log,thrust_log;
 
-  pcl::PointXYZ kd_hover,kp_hover,ki_hover,kd_path,kp_path;
-
   //functions
-  void init_pid();
-  void init_parameters();
+  void initPid();
+  void initParameters();
   //take in desired acc and current psi angle, calculate control output to quadrotor
   void acc_des2control(double,double,double,double);
-  double interpolate_thrust(double);
+  double interpolateThrust(double);
   std::vector<double> readTable(std::string);
 
  public:
 
-  dummybird(ros::NodeHandle nh, ros::NodeHandle nh_private);
-  virtual ~dummybird();
+  DummyBird(ros::NodeHandle nh, ros::NodeHandle nh_private);
+  virtual ~DummyBird();
 
   void on();
   void off();
   //hover controller, takes in position error, velocity error, integrated error and psi angle
-  void pid_hover_controller(pcl::PointXYZ,pcl::PointXYZ,pcl::PointXYZ,double);
+  void pidHoverController(pcl::PointXYZ,pcl::PointXYZ,pcl::PointXYZ,double);
+  void pidHoverVelController(pcl::PointXYZ,pcl::PointXYZ,pcl::PointXYZ,pcl::PointXYZ,double);
   //path follower controller, takes in position error, velocity error, path point accelaration and psi angle
-  void pid_path_controller(pcl::PointXYZ,pcl::PointXYZ,pcl::PointXYZ,double);
+  void pidPathController(pcl::PointXYZ,pcl::PointXYZ,pcl::PointXYZ,double);
   //direct control, takes in desired accelaration in x,y,z and angle psi
-  void direct_drive(double,double,double,double);
+  void directDrive(double,double,double,double);
 
-  float getLog_pitch(int);
-  float getLog_roll(int);
-  float getLog_thrust(int);
+  inline float getLogPitch(int i)
+  {
+    return pitch_log[i];
+  }
+
+  inline float getLogRoll(int i)
+  {
+    return roll_log[i];
+  }
+
+  inline float getLogThrust(int i)
+  {
+    return thrust_log[i];
+  }
+
 };

@@ -96,6 +96,45 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named BirdEye
+
+# Build rule for target.
+BirdEye: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 BirdEye
+.PHONY : BirdEye
+
+# fast build rule for target.
+BirdEye/fast:
+	$(MAKE) -f CMakeFiles/BirdEye.dir/build.make CMakeFiles/BirdEye.dir/build
+.PHONY : BirdEye/fast
+
+#=============================================================================
+# Target rules for targets named DummyBird
+
+# Build rule for target.
+DummyBird: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 DummyBird
+.PHONY : DummyBird
+
+# fast build rule for target.
+DummyBird/fast:
+	$(MAKE) -f CMakeFiles/DummyBird.dir/build.make CMakeFiles/DummyBird.dir/build
+.PHONY : DummyBird/fast
+
+#=============================================================================
+# Target rules for targets named HighBird
+
+# Build rule for target.
+HighBird: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 HighBird
+.PHONY : HighBird
+
+# fast build rule for target.
+HighBird/fast:
+	$(MAKE) -f CMakeFiles/HighBird.dir/build.make CMakeFiles/HighBird.dir/build
+.PHONY : HighBird/fast
+
+#=============================================================================
 # Target rules for targets named ROSBUILD_genmsg_cpp
 
 # Build rule for target.
@@ -148,6 +187,19 @@ ROSBUILD_gensrv_lisp/fast:
 .PHONY : ROSBUILD_gensrv_lisp/fast
 
 #=============================================================================
+# Target rules for targets named VectorComputation
+
+# Build rule for target.
+VectorComputation: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 VectorComputation
+.PHONY : VectorComputation
+
+# fast build rule for target.
+VectorComputation/fast:
+	$(MAKE) -f CMakeFiles/VectorComputation.dir/build.make CMakeFiles/VectorComputation.dir/build
+.PHONY : VectorComputation/fast
+
+#=============================================================================
 # Target rules for targets named angleTransform
 
 # Build rule for target.
@@ -161,19 +213,6 @@ angleTransform/fast:
 .PHONY : angleTransform/fast
 
 #=============================================================================
-# Target rules for targets named birdeye
-
-# Build rule for target.
-birdeye: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 birdeye
-.PHONY : birdeye
-
-# fast build rule for target.
-birdeye/fast:
-	$(MAKE) -f CMakeFiles/birdeye.dir/build.make CMakeFiles/birdeye.dir/build
-.PHONY : birdeye/fast
-
-#=============================================================================
 # Target rules for targets named clean-test-results
 
 # Build rule for target.
@@ -185,32 +224,6 @@ clean-test-results: cmake_check_build_system
 clean-test-results/fast:
 	$(MAKE) -f CMakeFiles/clean-test-results.dir/build.make CMakeFiles/clean-test-results.dir/build
 .PHONY : clean-test-results/fast
-
-#=============================================================================
-# Target rules for targets named dummybird
-
-# Build rule for target.
-dummybird: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 dummybird
-.PHONY : dummybird
-
-# fast build rule for target.
-dummybird/fast:
-	$(MAKE) -f CMakeFiles/dummybird.dir/build.make CMakeFiles/dummybird.dir/build
-.PHONY : dummybird/fast
-
-#=============================================================================
-# Target rules for targets named highbird
-
-# Build rule for target.
-highbird: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 highbird
-.PHONY : highbird
-
-# fast build rule for target.
-highbird/fast:
-	$(MAKE) -f CMakeFiles/highbird.dir/build.make CMakeFiles/highbird.dir/build
-.PHONY : highbird/fast
 
 #=============================================================================
 # Target rules for targets named quadSmart
@@ -381,18 +394,65 @@ tests/fast:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/build
 .PHONY : tests/fast
 
-#=============================================================================
-# Target rules for targets named vector_computation
+# target to build an object file
+src/BirdEye.o:
+	$(MAKE) -f CMakeFiles/BirdEye.dir/build.make CMakeFiles/BirdEye.dir/src/BirdEye.o
+.PHONY : src/BirdEye.o
 
-# Build rule for target.
-vector_computation: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 vector_computation
-.PHONY : vector_computation
+# target to preprocess a source file
+src/BirdEye.i:
+	$(MAKE) -f CMakeFiles/BirdEye.dir/build.make CMakeFiles/BirdEye.dir/src/BirdEye.i
+.PHONY : src/BirdEye.i
 
-# fast build rule for target.
-vector_computation/fast:
-	$(MAKE) -f CMakeFiles/vector_computation.dir/build.make CMakeFiles/vector_computation.dir/build
-.PHONY : vector_computation/fast
+# target to generate assembly for a file
+src/BirdEye.s:
+	$(MAKE) -f CMakeFiles/BirdEye.dir/build.make CMakeFiles/BirdEye.dir/src/BirdEye.s
+.PHONY : src/BirdEye.s
+
+# target to build an object file
+src/DummyBird.o:
+	$(MAKE) -f CMakeFiles/DummyBird.dir/build.make CMakeFiles/DummyBird.dir/src/DummyBird.o
+.PHONY : src/DummyBird.o
+
+# target to preprocess a source file
+src/DummyBird.i:
+	$(MAKE) -f CMakeFiles/DummyBird.dir/build.make CMakeFiles/DummyBird.dir/src/DummyBird.i
+.PHONY : src/DummyBird.i
+
+# target to generate assembly for a file
+src/DummyBird.s:
+	$(MAKE) -f CMakeFiles/DummyBird.dir/build.make CMakeFiles/DummyBird.dir/src/DummyBird.s
+.PHONY : src/DummyBird.s
+
+# target to build an object file
+src/HighBird.o:
+	$(MAKE) -f CMakeFiles/HighBird.dir/build.make CMakeFiles/HighBird.dir/src/HighBird.o
+.PHONY : src/HighBird.o
+
+# target to preprocess a source file
+src/HighBird.i:
+	$(MAKE) -f CMakeFiles/HighBird.dir/build.make CMakeFiles/HighBird.dir/src/HighBird.i
+.PHONY : src/HighBird.i
+
+# target to generate assembly for a file
+src/HighBird.s:
+	$(MAKE) -f CMakeFiles/HighBird.dir/build.make CMakeFiles/HighBird.dir/src/HighBird.s
+.PHONY : src/HighBird.s
+
+# target to build an object file
+src/VectorComputation.o:
+	$(MAKE) -f CMakeFiles/VectorComputation.dir/build.make CMakeFiles/VectorComputation.dir/src/VectorComputation.o
+.PHONY : src/VectorComputation.o
+
+# target to preprocess a source file
+src/VectorComputation.i:
+	$(MAKE) -f CMakeFiles/VectorComputation.dir/build.make CMakeFiles/VectorComputation.dir/src/VectorComputation.i
+.PHONY : src/VectorComputation.i
+
+# target to generate assembly for a file
+src/VectorComputation.s:
+	$(MAKE) -f CMakeFiles/VectorComputation.dir/build.make CMakeFiles/VectorComputation.dir/src/VectorComputation.s
+.PHONY : src/VectorComputation.s
 
 # target to build an object file
 src/angleTransform.o:
@@ -408,51 +468,6 @@ src/angleTransform.i:
 src/angleTransform.s:
 	$(MAKE) -f CMakeFiles/angleTransform.dir/build.make CMakeFiles/angleTransform.dir/src/angleTransform.s
 .PHONY : src/angleTransform.s
-
-# target to build an object file
-src/birdeye.o:
-	$(MAKE) -f CMakeFiles/birdeye.dir/build.make CMakeFiles/birdeye.dir/src/birdeye.o
-.PHONY : src/birdeye.o
-
-# target to preprocess a source file
-src/birdeye.i:
-	$(MAKE) -f CMakeFiles/birdeye.dir/build.make CMakeFiles/birdeye.dir/src/birdeye.i
-.PHONY : src/birdeye.i
-
-# target to generate assembly for a file
-src/birdeye.s:
-	$(MAKE) -f CMakeFiles/birdeye.dir/build.make CMakeFiles/birdeye.dir/src/birdeye.s
-.PHONY : src/birdeye.s
-
-# target to build an object file
-src/dummybird.o:
-	$(MAKE) -f CMakeFiles/dummybird.dir/build.make CMakeFiles/dummybird.dir/src/dummybird.o
-.PHONY : src/dummybird.o
-
-# target to preprocess a source file
-src/dummybird.i:
-	$(MAKE) -f CMakeFiles/dummybird.dir/build.make CMakeFiles/dummybird.dir/src/dummybird.i
-.PHONY : src/dummybird.i
-
-# target to generate assembly for a file
-src/dummybird.s:
-	$(MAKE) -f CMakeFiles/dummybird.dir/build.make CMakeFiles/dummybird.dir/src/dummybird.s
-.PHONY : src/dummybird.s
-
-# target to build an object file
-src/highbird.o:
-	$(MAKE) -f CMakeFiles/highbird.dir/build.make CMakeFiles/highbird.dir/src/highbird.o
-.PHONY : src/highbird.o
-
-# target to preprocess a source file
-src/highbird.i:
-	$(MAKE) -f CMakeFiles/highbird.dir/build.make CMakeFiles/highbird.dir/src/highbird.i
-.PHONY : src/highbird.i
-
-# target to generate assembly for a file
-src/highbird.s:
-	$(MAKE) -f CMakeFiles/highbird.dir/build.make CMakeFiles/highbird.dir/src/highbird.s
-.PHONY : src/highbird.s
 
 # target to build an object file
 src/quadSmart.o:
@@ -499,37 +514,23 @@ src/testControl.s:
 	$(MAKE) -f CMakeFiles/testControl.dir/build.make CMakeFiles/testControl.dir/src/testControl.s
 .PHONY : src/testControl.s
 
-# target to build an object file
-src/vector_computation.o:
-	$(MAKE) -f CMakeFiles/vector_computation.dir/build.make CMakeFiles/vector_computation.dir/src/vector_computation.o
-.PHONY : src/vector_computation.o
-
-# target to preprocess a source file
-src/vector_computation.i:
-	$(MAKE) -f CMakeFiles/vector_computation.dir/build.make CMakeFiles/vector_computation.dir/src/vector_computation.i
-.PHONY : src/vector_computation.i
-
-# target to generate assembly for a file
-src/vector_computation.s:
-	$(MAKE) -f CMakeFiles/vector_computation.dir/build.make CMakeFiles/vector_computation.dir/src/vector_computation.s
-.PHONY : src/vector_computation.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... BirdEye"
+	@echo "... DummyBird"
+	@echo "... HighBird"
 	@echo "... ROSBUILD_genmsg_cpp"
 	@echo "... ROSBUILD_genmsg_lisp"
 	@echo "... ROSBUILD_gensrv_cpp"
 	@echo "... ROSBUILD_gensrv_lisp"
+	@echo "... VectorComputation"
 	@echo "... angleTransform"
-	@echo "... birdeye"
 	@echo "... clean-test-results"
-	@echo "... dummybird"
 	@echo "... edit_cache"
-	@echo "... highbird"
 	@echo "... quadSmart"
 	@echo "... quadView"
 	@echo "... rebuild_cache"
@@ -544,19 +545,21 @@ help:
 	@echo "... test-results-run"
 	@echo "... testControl"
 	@echo "... tests"
-	@echo "... vector_computation"
+	@echo "... src/BirdEye.o"
+	@echo "... src/BirdEye.i"
+	@echo "... src/BirdEye.s"
+	@echo "... src/DummyBird.o"
+	@echo "... src/DummyBird.i"
+	@echo "... src/DummyBird.s"
+	@echo "... src/HighBird.o"
+	@echo "... src/HighBird.i"
+	@echo "... src/HighBird.s"
+	@echo "... src/VectorComputation.o"
+	@echo "... src/VectorComputation.i"
+	@echo "... src/VectorComputation.s"
 	@echo "... src/angleTransform.o"
 	@echo "... src/angleTransform.i"
 	@echo "... src/angleTransform.s"
-	@echo "... src/birdeye.o"
-	@echo "... src/birdeye.i"
-	@echo "... src/birdeye.s"
-	@echo "... src/dummybird.o"
-	@echo "... src/dummybird.i"
-	@echo "... src/dummybird.s"
-	@echo "... src/highbird.o"
-	@echo "... src/highbird.i"
-	@echo "... src/highbird.s"
 	@echo "... src/quadSmart.o"
 	@echo "... src/quadSmart.i"
 	@echo "... src/quadSmart.s"
@@ -566,9 +569,6 @@ help:
 	@echo "... src/testControl.o"
 	@echo "... src/testControl.i"
 	@echo "... src/testControl.s"
-	@echo "... src/vector_computation.o"
-	@echo "... src/vector_computation.i"
-	@echo "... src/vector_computation.s"
 .PHONY : help
 
 
